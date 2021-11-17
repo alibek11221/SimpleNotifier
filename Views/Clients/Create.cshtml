@@ -1,0 +1,19 @@
+@model Notifier.Dtos.Client.CreateClientDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Создание клиента</h2>
+<form asp-antiforgery="true" asp-controller="Clients" asp-action="Store">
+    <div class="form-group">
+        <label asp-for="Email">Email address</label>
+        <input asp-for="Email" class="form-control" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone">Phone</label>
+        <input asp-for="Phone" class="form-control" placeholder="Enter email">
+    </div>
+    <input type="submit" value="Save"/>
+</form>

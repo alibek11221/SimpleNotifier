@@ -1,0 +1,20 @@
+@model IEnumerable<Notifier.Dtos.Client.GetClientDto>;
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@if (Model.Any()){
+    <table class="table table-bordered">
+
+        @foreach (var client in Model){
+            <tr>
+                <td>@client.Email</td>
+            </tr>
+
+        }
+    </table>
+}
+else{
+    <div>Нет ничего</div>
+}

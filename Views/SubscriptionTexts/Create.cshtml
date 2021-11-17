@@ -1,0 +1,19 @@
+@model Notifier.Dtos.SubscriptionText.CreateSubscriptionTextDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Создать шаблон текста рассылки</h2>
+<form asp-antiforgery="true" asp-controller="SubscriptionTexts" asp-action="Store">
+    <div class="form-group">
+        <label asp-for="Subject">Тема рассылки</label>
+        <input asp-for="Subject" class="form-control" placeholder="Введите тему">
+    </div>
+    <div class="form-group">
+        <label asp-for="Body">Содержимое рассылки</label>
+        <input asp-for="Body" class="form-control" placeholder="Введите текст">
+    </div>
+    <input type="submit" value="Save"/>
+</form>

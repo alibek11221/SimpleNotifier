@@ -1,0 +1,43 @@
+@model IEnumerable<Notifier.Dtos.Subscription.GetSubscriptionDto>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Рассылки</h2>
+@if (Model.Any()){
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Переиодичность</th>
+            <th scope="col">Тип</th>
+            <th scope="col">Политика</th>
+            <th scope="col">Подписаны</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var subscriptionText in Model){
+            <tr>
+                <td>@subscriptionText.Name</td>
+                <td>@subscriptionText.Periodicity</td>
+                <td>@subscriptionText.Type</td>
+                <td>@subscriptionText.Policy</td>
+                <td>
+                    <ul>
+                        @foreach (var email in  @subscriptionText.Clients.Select(x => x.Email)){
+                            @Html.Raw("<li>" + email + "</li>")
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+}
+else{
+    <div>Нет ничего</div>
+}

@@ -1,0 +1,51 @@
+@using Notifier.Services
+@using Notifier.Data.Entities
+@using AutoMapper
+@using Notifier.Data.Enums
+@using Notifier.Dtos.SubscriptionText
+@model Notifier.Dtos.Subscription.CreateSubscriptionDto
+@inject ISubscriptionTextService _subscriptionTextService;
+@inject IMapper _mapper
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Создать рассылку</h2>
+<form asp-antiforgery="true" asp-controller="Subscriptions" asp-action="Store">
+    <div class="form-group">
+        <label asp-for="Name">Название рассылки</label>
+        <input asp-for="Name" class="form-control" placeholder="Введите название">
+    </div>
+    <div class="form-group">
+        <label asp-for="NotificationDate">Начать с</label>
+        <input asp-for="NotificationDate" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Periodicity">Повторять каждый(ые)</label>
+        <div class="row">
+            <div class="col">
+                <input asp-for="Periodicity" class="form-control">
+            </div>
+            <div class="col">
+                <select class="form-control" aria-label="Default select example" asp-for="Policy"
+                        asp-items="Html.GetEnumSelectList<SubscriptionPolicy>()">
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Type">Отправлять по </label>
+        <select class="form-control" aria-label="Default select example" asp-for="Type"
+                asp-items="Html.GetEnumSelectList<SubscriptionType>()">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="TextId">Шаблон текста рассылки</label>
+        <select class="form-control" aria-label="Default select example" asp-for="TextId"
+                asp-items="@(new SelectList((await _subscriptionTextService.Get()).Select(x => _mapper.Map<SubscriptionText, GetSubscriptionTextDto>(x)), nameof(GetSubscriptionTextDto.Id), nameof(GetSubscriptionTextDto.Body)))">
+        </select>
+    </div>
+    <input type="submit" value="Save"/>
+</form>

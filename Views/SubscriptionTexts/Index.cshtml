@@ -1,0 +1,42 @@
+@model IEnumerable<Notifier.Dtos.SubscriptionText.GetSubscriptionTextDto>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Шаблоны текста </h2>
+@if (Model.Any()){
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Тема</th>
+            <th scope="col">Текс</th>
+            <th scope="col">Рассылки</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var subscriptionText in Model){
+            <tr>
+                <td>@subscriptionText.Subject</td>
+                <td>@subscriptionText.Body</td>
+                <td>
+                @if (subscriptionText.Subscriptions.Any()){
+                    foreach (var subscription in subscriptionText.Subscriptions){
+                        @subscription.Name;
+                    }
+                }
+                else{
+                    @Html.Raw("Рассылки еще не определены");
+                }
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+}
+else{
+    <div>Нет ничего</div>
+}

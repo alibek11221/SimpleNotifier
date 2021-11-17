@@ -1,0 +1,16 @@
+@model System.Collections.Generic.List<Microsoft.AspNetCore.Identity.IdentityUser>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+<table>
+    @foreach (var user in Model)
+    {
+        <p>@user.UserName</p>
+        <p>@user.Email</p>
+        <p>@user.PasswordHash</p>
+    }
+</table>

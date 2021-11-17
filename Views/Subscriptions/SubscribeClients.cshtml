@@ -1,0 +1,29 @@
+@using Notifier.Data.Entities
+@model Notifier.Dtos.Subscription.SubscribeClientsDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Подписать на рассылку</h2>
+<form asp-antiforgery="true" asp-controller="Subscriptions" asp-action="SubscribeClients">
+    <div class="form-group">
+        <label asp-for="SubscriptionId">Рассылка</label>
+        <select
+            class="form-control"
+            asp-for="SubscriptionId"
+            asp-items="@(new SelectList(ViewBag.Subscriptions, nameof(Subscription.Id), nameof(Subscription.Name)))">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClientIds">Клиенты</label>
+        <select
+            class="form-control"
+            multiple="multiple"
+            asp-for="ClientIds"
+            asp-items="@(new MultiSelectList(ViewBag.Clients, nameof(Client.Id), nameof(Client.Email)))">
+        </select>
+    </div>
+    <input type="submit" value="Save"/>
+</form>

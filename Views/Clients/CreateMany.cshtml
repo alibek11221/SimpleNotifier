@@ -1,0 +1,15 @@
+@model Notifier.Dtos.Client.CreateManyClientsDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Создать несколько получателей рассылки</h2>
+<form asp-antiforgery="true" asp-controller="Clients" asp-action="StoreMany">
+    <div class="form-group">
+        <label asp-for="ClientsWithEmailsString">Email addresses</label>
+        <textarea class="form-control" rows="10" cols="2" asp-for="ClientsWithEmailsString"></textarea>
+    </div>
+    <input type="submit" value="Save"/>
+</form>
